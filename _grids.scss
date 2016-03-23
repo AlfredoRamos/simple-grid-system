@@ -1,5 +1,5 @@
 /**
- * Yet another simple grid system (made for personal use)
+ * Simple Grid System
  * GitHub <https://github.com/AlfredoRamos/simple-grid-system>
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
  * @version 0.1.0
@@ -14,7 +14,7 @@
 // Number of columns
 $grid-columns: 12;
 
-// Column spacing (rem base 16)
+// Column spacing (rem base 10)
 // It should be < 4.5rem
 $grid-spacing: 1rem; // 10/10
 
