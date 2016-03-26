@@ -2,7 +2,7 @@
  * Simple Grid System
  * GitHub <https://github.com/AlfredoRamos/simple-grid-system>
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
- * @version 0.2.1
+ * @version 0.2.2
  * @copyright (c) 2015 Alfredo Ramos
  * @license GNU GPL-3.0+ <https://www.gnu.org/licenses/gpl-3.0.txt>
  */
@@ -204,33 +204,6 @@ $screen-lg-max-width: 117rem; // 1170/10
 }
 
 //-------------------------------------------------------
-// PLACEHOLDERS
-//-------------------------------------------------------
-%clearfix {
-	zoom: 1; // For IE
-	
-	&:before,
-	&:after {
-		content: "";
-		display: table;
-	}
-	
-	&:after {
-		clear: both;
-	}
-}
-
-%container {
-	margin-left: auto;
-	margin-right: auto;
-	overflow: hidden;
-	word-wrap: break-word; // Optional
-	@include rem(margin-bottom, $grid-spacing);
-	@include rem(padding-left, $grid-spacing);
-	@include rem(padding-right, $grid-spacing);
-}
-
-//-------------------------------------------------------
 // USAGE
 //-------------------------------------------------------
 * {
@@ -248,11 +221,31 @@ html {
 
 // Clearfix helper
 .clearfix {
-	@extend %clearfix;
+	zoom: 1; // For IE
+	
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	
+	&:after {
+		clear: both;
+	}
+}
+
+.container-fluid {
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	word-wrap: break-word; // Optional
+	@include rem(margin-bottom, $grid-spacing);
+	@include rem(padding-left, $grid-spacing);
+	@include rem(padding-right, $grid-spacing);
 }
 
 .container {
-	@extend %container;
+	@extend .container-fluid;
 	
 	@include responsive(min-width, $screen-sm) {
 		@include rem(max-width, $screen-sm-max-width);
@@ -265,15 +258,11 @@ html {
 	}
 }
 
-.container-fluid {
-	@extend %container;
-}
-
 .row {
 	overflow: hidden;
 	@include rem(margin-left, -$grid-spacing);
 	@include rem(margin-right, -$grid-spacing);
-	@extend %clearfix;
+	@extend .clearfix;
 }
 
 // Generate grid columns
