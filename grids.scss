@@ -58,11 +58,11 @@ $screen-lg-max-width: 117rem; // 1170/10
 // @param	$base		The rem base (optional).
 @function calc-rems($pixels, $base: 10) {
 	$rems: #{parse-int($pixels) / $base}rem;
-	
+
 	@if unit($pixels) == 'rem' {
 		$rems: $pixels;
 	}
-	
+
 	@return $rems;
 }
 
@@ -71,11 +71,11 @@ $screen-lg-max-width: 117rem; // 1170/10
 // @param	$base		The rem base (optional).
 @function calc-pixels($rems, $base: 10) {
 	$pixels: #{parse-int($rems) * $base}px;
-	
+
 	@if unit($rems) == 'px' {
 		$pixels: $rems;
 	}
-	
+
 	@return $pixels;
 }
 
@@ -100,15 +100,15 @@ $screen-lg-max-width: 117rem; // 1170/10
 		.#{$column-class}-#{$breakpoint}-#{$column} {
 			width: grid-width($column, $columns);
 		}
-		
+
 		.#{$column-class}-#{$breakpoint}-pull-#{$column} {
 			right: grid-width($column, $columns);
 		}
-		
+
 		.#{$column-class}-#{$breakpoint}-push-#{$column} {
 			left: grid-width($column, $columns);
 		}
-		
+
 		.#{$column-class}-#{$breakpoint}-offset-#{$column} {
 			margin-left: grid-width($column, $columns);
 		}
@@ -135,38 +135,38 @@ $screen-lg-max-width: 117rem; // 1170/10
 		position: relative;
 		overflow: hidden;
 	}
-	
+
 	// Extra small columns
 	[class*="#{$column-class}-#{$column-xs-class}-"] {
 		float: left;
 	}
-	
+
 	@include grid-columns-helper($column-xs-class, $columns);
-	
+
 	// Small columns
 	@include responsive(min-width, $screen-sm) {
 		[class*="#{$column-class}-#{$column-sm-class}-"] {
 			float: left;
 		}
-		
+
 		@include grid-columns-helper($column-sm-class, $columns);
 	}
-	
+
 	// Medium columns
 	@include responsive(min-width, $screen-md) {
 		[class*="#{$column-class}-#{$column-md-class}-"] {
 			float: left;
 		}
-		
+
 		@include grid-columns-helper($column-md-class, $columns);
 	}
-	
+
 	// Large columns
 	@include responsive(min-width, $screen-lg) {
 		[class*="#{$column-class}-#{$column-lg-class}-"] {
 			float: left;
 		}
-		
+
 		@include grid-columns-helper($column-lg-class, $columns);
 	}
 }
@@ -183,12 +183,12 @@ $screen-lg-max-width: 117rem; // 1170/10
 			$rem: append($rem, $value);
 		} @else {
 			$unit: unit($value);
-			
+
 			@if $unit == 'px' {
 				$px : append($px,  calc-pixels($value));
 				$rem: append($rem, calc-rems($value));
 			}
-			
+
 			@if $unit == 'rem' {
 				$px : append($px,  calc-pixels($value));
 				$rem: append($rem, calc-rems($value));
@@ -224,13 +224,13 @@ html {
 // Clearfix helper
 .clearfix {
 	zoom: 1; // For IE
-	
+
 	&:before,
 	&:after {
 		content: "";
 		display: table;
 	}
-	
+
 	&:after {
 		clear: both;
 	}
@@ -248,7 +248,7 @@ html {
 
 .container {
 	@extend .container-fluid;
-	
+
 	@include responsive(min-width, $screen-sm) {
 		@include rem(max-width, $screen-sm-max-width);
 	}
