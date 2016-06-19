@@ -11,10 +11,10 @@ branches:
     - master
 
 before_script:
-  - gem install sass --no-ri --no-rdoc
   - gem update --system
+  - gem install sass --no-document
+  - gem update
   - gem cleanup
-  - gem --version
 
 script:
   - 'tests/run_tests.rb'
