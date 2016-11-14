@@ -1,0 +1,27 @@
+// Number of columns
+$grid-columns: 12;
+
+// Column spacing (rem base 10)
+// It should be < 4.5rem
+$grid-spacing: 1rem; // 10/10
+
+// CSS class names
+$column-class: 'col';	// Global (without dot)
+$column-xs-class: 'xs';	// Extra small
+$column-sm-class: 'sm';	// Small
+$column-md-class: 'md';	// Medium
+$column-lg-class: 'lg';	// Large
+
+// Media queries viewports (rem base 16)
+$screen-xs: 30rem; // 480/16
+$screen-sm: 48rem; // 768/16
+$screen-md: 62rem; // 992/16
+$screen-lg: 75rem; // 1200/16
+
+// Maximum width (rem base 10)
+$screen-sm-max-width: 75rem; // 750/10
+$screen-md-max-width: 97rem; // 970/10
+$screen-lg-max-width: 117rem; // 1170/10
+
+// Default font size (rem base 10)
+$default-font-size: 1.4rem;

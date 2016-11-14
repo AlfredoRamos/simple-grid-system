@@ -1,0 +1,132 @@
+// Set border-box on the box-sizing property to all browsers
+@mixin border-box {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+// Define a media query to set style rules depending on the
+// device's viewport
+// @param	$viewport	The visible area of the screen
+// @param	$size		The viewport size
+@mixin responsive($viewport, $size) {
+	@media only screen and (#{$viewport}: $size), (#{$viewport}: calc-pixels($size, 16)) {
+		@content;
+	}
+}
+
+// Generate the CSS classes to each viewport size
+// @param	$class		The class name of the viewport
+// @param	$columns	Total number of columns
+@mixin grid-columns-helper($class, $columns) {
+	@for $column from 1 through $columns {
+		.#{$column-class}-#{$class}-#{$column} {
+			width: grid-width($column, $columns);
+		}
+
+		.#{$column-class}-#{$class}-pull-#{$column} {
+			right: grid-width($column, $columns);
+		}
+
+		.#{$column-class}-#{$class}-push-#{$column} {
+			left: grid-width($column, $columns);
+		}
+
+		.#{$column-class}-#{$class}-offset-#{$column} {
+			margin-left: grid-width($column, $columns);
+		}
+	}
+
+	.#{$column-class}-#{$class}-pull-0 {
+		right: auto;
+	}
+
+	.#{$column-class}-#{$class}-push-0 {
+		left: auto;
+	}
+
+	.#{$column-class}-#{$class}-offset-0 {
+		margin-left: 0;
+	}
+}
+
+// Generate column CSS including media queries
+// @param	$columns	Number of columns to generate
+@mixin grid-columns($columns: 12) {
+	// Global
+	[class*="#{$column-class}-"] {
+		padding-left: $grid-spacing;
+		padding-right: $grid-spacing;
+		position: relative;
+		overflow: hidden;
+	}
+
+	// Extra small columns
+	[class*="#{$column-class}-#{$column-xs-class}-"] {
+		float: left;
+	}
+
+	@include grid-columns-helper($column-xs-class, $columns);
+
+	// Small columns
+	@include responsive(min-width, $screen-sm) {
+		[class*="#{$column-class}-#{$column-sm-class}-"] {
+			float: left;
+		}
+
+		@include grid-columns-helper($column-sm-class, $columns);
+	}
+
+	// Medium columns
+	@include responsive(min-width, $screen-md) {
+		[class*="#{$column-class}-#{$column-md-class}-"] {
+			float: left;
+		}
+
+		@include grid-columns-helper($column-md-class, $columns);
+	}
+
+	// Large columns
+	@include responsive(min-width, $screen-lg) {
+		[class*="#{$column-class}-#{$column-lg-class}-"] {
+			float: left;
+		}
+
+		@include grid-columns-helper($column-lg-class, $columns);
+	}
+}
+
+// Slightly modified version of the rem() mixin by Hugo Giraudel
+// http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+// @param	$property		The property which will receive the values
+// @param	$values			Values which will be assigned to the property
+@mixin rem($property, $values) {
+	$px : ();
+	$rem: ();
+
+	@each $value in $values {
+		@if $value == 0 or $value == auto {
+			$px : append($px , $value);
+			$rem: append($rem, $value);
+		} @else {
+			$unit: unit($value);
+
+			@if $unit == 'px' {
+				$px : append($px,  calc-pixels($value));
+				$rem: append($rem, calc-rems($value));
+			}
+
+			@if $unit == 'rem' {
+				$px : append($px,  calc-pixels($value));
+				$rem: append($rem, calc-rems($value));
+			}
+		}
+	}
+
+	@if $px == $rem {
+		#{$property}: $px;
+	} @else {
+		#{$property}: $px; // For IE < 8
+		#{$property}: $rem;
+	}
+}
