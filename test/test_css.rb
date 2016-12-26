@@ -2,10 +2,6 @@ require 'minitest/autorun'
 
 class TestCss < Minitest::Test
 
-  def self.test_order
-    :alpha
-  end
-
   def setup
     @files = {
       :input  => 'grids.scss',
@@ -13,16 +9,17 @@ class TestCss < Minitest::Test
     }
   end
 
-  def test_0_sass_compilation
+  def test_css_file
+    # Create CSS file
     system('sass -Ct compressed %1$s %2$s --sourcemap=none' % [
       @files[:input],
       @files[:output]
     ])
 
+    # Check the previous command exit code
     assert_same(0, $?.to_i)
-  end
 
-  def test_1_css_file
+    # Check if file was created
     assert File.exist?(@files[:output])
   end
 end
