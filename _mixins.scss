@@ -1,12 +1,12 @@
-// Set border-box on the box-sizing property to all browsers
+// Set border-box to the box-sizing property
 @mixin border-box {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
-// Define a media query to set style rules depending on the
-// device's viewport
+// Define a media query to set style rules depending
+// on the device's viewport
 // @param	$viewport	The visible area of the screen
 // @param	$size		The viewport size
 @mixin responsive($viewport, $size) {
@@ -15,38 +15,40 @@
 	}
 }
 
-// Generate the CSS classes to each viewport size
+// Generate a CSS class for every viewport size
 // @param	$class		The class name of the viewport
 // @param	$columns	Total number of columns
 @mixin grid-columns-helper($class, $columns) {
-	@for $column from 1 through $columns {
-		.#{$column-class}-#{$class}-#{$column} {
-			width: grid-width($column, $columns);
+	@for $column from 0 through $columns {
+		@if $column > 0 {
+			.#{$column-class}-#{$class}-#{$column} {
+				width: grid-width($column, $columns);
+			}
 		}
 
 		.#{$column-class}-#{$class}-pull-#{$column} {
-			right: grid-width($column, $columns);
+			@if $column > 0 {
+				right: grid-width($column, $columns);
+			} @else {
+				right: auto; // Reset
+			}
 		}
 
 		.#{$column-class}-#{$class}-push-#{$column} {
-			left: grid-width($column, $columns);
+			@if $column > 0 {
+				left: grid-width($column, $columns);
+			} @else {
+				left: auto; // Reset
+			}
 		}
 
 		.#{$column-class}-#{$class}-offset-#{$column} {
-			margin-left: grid-width($column, $columns);
+			@if $column > 0 {
+				margin-left: grid-width($column, $columns);
+			} @else {
+				margin-left: 0; // Reset
+			}
 		}
-	}
-
-	.#{$column-class}-#{$class}-pull-0 {
-		right: auto;
-	}
-
-	.#{$column-class}-#{$class}-push-0 {
-		left: auto;
-	}
-
-	.#{$column-class}-#{$class}-offset-0 {
-		margin-left: 0;
 	}
 }
 
@@ -55,8 +57,8 @@
 @mixin grid-columns($columns: 12) {
 	// Global
 	[class*="#{$column-class}-"] {
-		padding-left: $grid-spacing;
-		padding-right: $grid-spacing;
+		@include rem(padding-left, $grid-spacing);
+		@include rem(padding-right, $grid-spacing);
 		position: relative;
 		overflow: hidden;
 	}

@@ -31,7 +31,7 @@ html {
 }
 
 // Set default font size, it reverts the effect
-// of setting a mall font size on the <html> tag
+// of setting a small font size on the <html> tag
 body {
 	@include rem(font-size, $default-font-size);
 }
