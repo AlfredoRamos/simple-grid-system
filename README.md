@@ -12,12 +12,18 @@ Precompiled CSS files can be found at [`grids.css`](https://gist.github.com/Alfr
 
 ### Build
 
+Create `build` directory:
+
+```shell
+mkdir build
+```
+
 Using `sass` Ruby gem:
 
 ```shell
-sass -Ct expanded grids.scss grids.css --sourcemap=none
+sass -Ct expanded scss/grids.scss build/grids.css --sourcemap=none
 ```
 
 ```shell
-sass -Ct compressed grids.scss grids.min.css --sourcemap=none
+sass -Ct compressed scss/grids.scss build/grids.min.css --sourcemap=none
 ```
