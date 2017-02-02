@@ -10,7 +10,7 @@
 // @param	$viewport	The visible area of the screen
 // @param	$size		The viewport size
 @mixin responsive($viewport, $size) {
-	@media only screen and (#{$viewport}: $size), (#{$viewport}: calc-pixels($size, 16)) {
+	@media only screen and (#{$viewport}: $size), (#{$viewport}: calc-pixels($size)) {
 		@content;
 	}
 }
@@ -18,7 +18,7 @@
 // Generate a CSS class for every viewport size
 // @param	$class		The class name of the viewport
 // @param	$columns	Total number of columns
-@mixin grid-columns-helper($class, $columns) {
+@mixin grid-columns-helper($class, $columns: $grid-columns) {
 	@for $column from 0 through $columns {
 		@if $column > 0 {
 			.#{$column-class}-#{$class}-#{$column} {
@@ -54,7 +54,7 @@
 
 // Generate column CSS including media queries
 // @param	$columns	Number of columns to generate
-@mixin grid-columns($columns: 12) {
+@mixin grid-columns($columns: $grid-columns) {
 	// Global
 	[class*="#{$column-class}-"] {
 		@include rem(padding-left, $grid-spacing);
@@ -100,8 +100,8 @@
 
 // Slightly modified version of the rem() mixin by Hugo Giraudel
 // http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
-// @param	$property		The property which will receive the values
-// @param	$values			Values which will be assigned to the property
+// @param	$property	The property which will receive the values
+// @param	$values		Values which will be assigned to the property
 @mixin rem($property, $values) {
 	$px : ();
 	$rem: ();
@@ -111,14 +111,12 @@
 			$px : append($px , $value);
 			$rem: append($rem, $value);
 		} @else {
-			$unit: unit($value);
-
-			@if $unit == 'px' {
+			@if unit($value) == 'px' {
 				$px : append($px,  calc-pixels($value));
 				$rem: append($rem, calc-rems($value));
 			}
 
-			@if $unit == 'rem' {
+			@if unit($value) == 'rem' {
 				$px : append($px,  calc-pixels($value));
 				$rem: append($rem, calc-rems($value));
 			}

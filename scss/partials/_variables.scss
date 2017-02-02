@@ -1,9 +1,11 @@
 // Number of columns
 $grid-columns: 12;
 
-// Column spacing (rem base 10)
-// It should be < 4.5rem
-$grid-spacing: 1rem; // 10/10
+// Usually (but not always) 1rem = 16px
+$rem-base: 16;
+
+// Column spacing
+$grid-spacing: 1rem;
 
 // CSS class names
 $column-class: 'col';	// Global (without dot)
@@ -12,16 +14,13 @@ $column-sm-class: 'sm';	// Small
 $column-md-class: 'md';	// Medium
 $column-lg-class: 'lg';	// Large
 
-// Media queries viewports (rem base 16)
-$screen-xs: 30rem; // 480/16
-$screen-sm: 48rem; // 768/16
-$screen-md: 62rem; // 992/16
-$screen-lg: 75rem; // 1200/16
+// Media queries viewports
+$screen-xs: ((480 / $rem-base) * 1rem);
+$screen-sm: ((768 / $rem-base) * 1rem);
+$screen-md: ((992 / $rem-base) * 1rem);
+$screen-lg: ((1200 / $rem-base) * 1rem);
 
-// Maximum width (rem base 10)
-$screen-sm-max-width: 75rem; // 750/10
-$screen-md-max-width: 97rem; // 970/10
-$screen-lg-max-width: 117rem; // 1170/10
-
-// Default font size (rem base 10)
-$default-font-size: 1.4rem;
+// Maximum width
+$screen-sm-max-width: ((750 / $rem-base) * 1rem);
+$screen-md-max-width: ((970 / $rem-base) * 1rem);
+$screen-lg-max-width: ((1170 / $rem-base) * 1rem);

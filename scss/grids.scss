@@ -2,7 +2,7 @@
  * Simple Grid System
  * https://github.com/AlfredoRamos/simple-grid-system
  * @author Alfredo Ramos <alfredo.ramos@yandex.com>
- * @version 1.2.1
+ * @version 1.2.2
  * @copyright (c) 2015 Alfredo Ramos
  * @license GNU GPL-3.0+
  */
@@ -25,17 +25,6 @@
 	}
 }
 
-// Required to set the rem base to 10
-html {
-	font-size: 62.5%;
-}
-
-// Set default font size, it reverts the effect
-// of setting a small font size on the <html> tag
-body {
-	@include rem(font-size, $default-font-size);
-}
-
 // Clearfix helper
 .clearfix {
 	zoom: 1; // For IE
@@ -55,7 +44,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
-	word-wrap: break-word; // Optional
+	word-wrap: break-word;
 	@include rem(margin-bottom, $grid-spacing);
 	@include rem(padding-left, $grid-spacing);
 	@include rem(padding-right, $grid-spacing);
@@ -103,7 +92,6 @@ body {
 		padding-bottom: ((3 / 4) * 100%);
 	}
 
-	// video, iframe, object, embed, .responsive-media-item
 	& video,
 	& iframe,
 	& object,
