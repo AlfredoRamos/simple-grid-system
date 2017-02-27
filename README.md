@@ -1,4 +1,4 @@
-### Info
+### About
 
 Simple SASS Grid System
 
