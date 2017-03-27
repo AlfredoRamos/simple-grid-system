@@ -92,11 +92,11 @@
 		padding-bottom: ((3 / 4) * 100%);
 	}
 
-	& video,
-	& iframe,
-	& object,
-	& embed,
-	& &-item {
+	video,
+	iframe,
+	object,
+	embed,
+	&-item {
 		width: 100%;
 		height: 100%;
 		border: 0;
