@@ -1,33 +1,38 @@
-/// Number of columns
-/// @type	number
-$grid-columns: 12;
+/// Grid settings
+/// @type	list
+$grid: (
+	'columns': 12,
+	'spacing': 1rem
+);
 
 /// REM base
 /// Usually 1rem = 16px
 /// @type	number
 $rem-base: 16;
 
-/// Column spacing
-/// @type	number
-$grid-spacing: 1rem;
-
 /// CSS class names
-/// @type	string
-$column-class: 'col';	// Global (without dot)
-$column-xs-class: 'xs';	// Extra small
-$column-sm-class: 'sm';	// Small
-$column-md-class: 'md';	// Medium
-$column-lg-class: 'lg';	// Large
+/// @type	list
+$column-class: (
+	'base':		'col',	// Base (without dot)
+	'xsmall':	'xs',
+	'small':	'sm',
+	'medium':	'md',
+	'large':	'lg'
+);
 
 /// Media queries viewports
-/// @type	number
-$screen-xs: ((480 / $rem-base) * 1rem);
-$screen-sm: ((768 / $rem-base) * 1rem);
-$screen-md: ((992 / $rem-base) * 1rem);
-$screen-lg: ((1200 / $rem-base) * 1rem);
+/// @type	list
+$viewport: (
+	'xsmall':	((480 / $rem-base) * 1rem),
+	'small':	((768 / $rem-base) * 1rem),
+	'medium':	((992 / $rem-base) * 1rem),
+	'large':	((1200 / $rem-base) * 1rem)
+);
 
 /// Maximum width
-/// @type	number
-$screen-sm-max-width: ((750 / $rem-base) * 1rem);
-$screen-md-max-width: ((970 / $rem-base) * 1rem);
-$screen-lg-max-width: ((1170 / $rem-base) * 1rem);
+/// @type	list
+$viewport-size: (
+	'small':	((750 / $rem-base) * 1rem),
+	'medium':	((970 / $rem-base) * 1rem),
+	'large':	((1170 / $rem-base) * 1rem)
+);

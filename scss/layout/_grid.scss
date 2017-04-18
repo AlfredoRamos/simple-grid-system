@@ -3,31 +3,57 @@
 	margin-right: auto;
 	overflow: hidden;
 	word-wrap: break-word;
-	@include rem(margin-bottom, $grid-spacing);
-	@include rem(padding-left, $grid-spacing);
-	@include rem(padding-right, $grid-spacing);
+	@include rem(margin-bottom, map-get($grid, 'spacing'));
+	@include rem(padding-left, map-get($grid, 'spacing'));
+	@include rem(padding-right, map-get($grid, 'spacing'));
 }
 
 .container {
 	@extend .container-fluid;
 
-	@include responsive(min-width, $screen-sm) {
-		@include rem(max-width, $screen-sm-max-width);
-	}
-	@include responsive(min-width, $screen-md) {
-		@include rem(max-width, $screen-md-max-width);
-	}
-	@include responsive(min-width, $screen-lg) {
-		@include rem(max-width, $screen-lg-max-width);
+	@each $key, $value in $column-class {
+		@if ($key != 'base' and $key != 'xsmall') {
+			@include responsive(min-width, map-get($viewport, $key)) {
+				@include rem(max-width, map-get($viewport-size, $key));
+			}
+		}
 	}
 }
 
 .row {
 	overflow: hidden;
-	@include rem(margin-left, -$grid-spacing);
-	@include rem(margin-right, -$grid-spacing);
+	@include rem(margin-left, (map-get($grid, 'spacing') * -1));
+	@include rem(margin-right, (map-get($grid, 'spacing') * -1));
 	@extend .clearfix;
 }
 
-// Generate grid columns
-@include grid-columns($grid-columns);
+@each $key, $value in $column-class {
+	$class: '#{map-get($column-class, 'base')}-#{$value}';
+
+	@if ($key == 'base') {
+		$class: '#{$value}';
+	}
+
+	@if ($key == 'base') {
+		[class*="#{$class}-"] {
+			position: relative;
+			overflow: hidden;
+			@include rem(padding-left, map-get($grid, 'spacing'));
+			@include rem(padding-right, map-get($grid, 'spacing'));
+		}
+	} @else if ($key == 'xsmall') {
+		[class*="#{$class}-"] {
+			float: left;
+		}
+
+		@include grid-columns($class, map-get($grid, 'columns'));
+	} @else {
+		@include responsive(min-width, map-get($viewport, $key)) {
+			[class*="#{$class}-"] {
+				float: left;
+			}
+
+			@include grid-columns($class, map-get($grid, 'columns'));
+		}
+	}
+}

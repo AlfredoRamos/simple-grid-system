@@ -1,8 +1,8 @@
 /// Get grid width
 /// @param	number	$column		Current column index
-/// @param	numer	$columns	Number of columns (see $grid-columns)
+/// @param	numer	$columns	Number of columns
 /// @return	number	Percentage
-@function grid-width($column, $columns: $grid-columns) {
+@function grid-width($column, $columns) {
 	@return ($column * (100% / $columns));
 }
 
@@ -15,9 +15,9 @@
 
 /// Convert given pixels to rems
 /// @param	number	$pixels		The pixels to convert
-/// @param	number	$base		The rem base (optional)
+/// @param	number	$base		The rem base
 /// @return	number	Rems
-@function calc-rems($pixels, $base: $rem-base) {
+@function calc-rems($pixels, $base) {
 	$rems: ((parse-int($pixels) / $base) * 1rem);
 
 	@if unit($pixels) == 'rem' {
@@ -29,9 +29,9 @@
 
 /// Convert given rems to pixels
 /// @param	number	$rems	The rems to convert
-/// @param	number	$base	The rem base (optional).
+/// @param	number	$base	The rem base
 /// @return	number	Pixels
-@function calc-pixels($rems, $base: $rem-base) {
+@function calc-pixels($rems, $base) {
 	$pixels: ((parse-int($rems) * $base) * 1px);
 
 	@if unit($rems) == 'px' {
