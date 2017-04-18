@@ -12,7 +12,5 @@ branches:
 
 before_install:
   - gem update --system
-
-before_script:
   - gem update --no-document
   - gem cleanup
