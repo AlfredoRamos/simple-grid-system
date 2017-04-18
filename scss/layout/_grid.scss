@@ -1,0 +1,33 @@
+.container-fluid {
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	word-wrap: break-word;
+	@include rem(margin-bottom, $grid-spacing);
+	@include rem(padding-left, $grid-spacing);
+	@include rem(padding-right, $grid-spacing);
+}
+
+.container {
+	@extend .container-fluid;
+
+	@include responsive(min-width, $screen-sm) {
+		@include rem(max-width, $screen-sm-max-width);
+	}
+	@include responsive(min-width, $screen-md) {
+		@include rem(max-width, $screen-md-max-width);
+	}
+	@include responsive(min-width, $screen-lg) {
+		@include rem(max-width, $screen-lg-max-width);
+	}
+}
+
+.row {
+	overflow: hidden;
+	@include rem(margin-left, -$grid-spacing);
+	@include rem(margin-right, -$grid-spacing);
+	@extend .clearfix;
+}
+
+// Generate grid columns
+@include grid-columns($grid-columns);
