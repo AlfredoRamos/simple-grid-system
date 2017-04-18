@@ -1,22 +1,22 @@
-// Get grid width
-// @param	number	$column		Current column index
-// @param	numer	$columns	Number of columns (see $grid-columns)
-// @return	number	Percentage
+/// Get grid width
+/// @param	number	$column		Current column index
+/// @param	numer	$columns	Number of columns (see $grid-columns)
+/// @return	number	Percentage
 @function grid-width($column, $columns: $grid-columns) {
 	@return ($column * (100% / $columns));
 }
 
-// Convert a given value to integer
-// @param	$n		The value to convert
-// @param	number	Unitless
+/// Convert a given value to integer
+/// @param	$n		The value to convert
+/// @param	number	Unitless
 @function parse-int($n) {
 	@return ($n / (($n * 0) + 1));
 }
 
-// Convert given pixels to rems
-// @param	number	$pixels		The pixels to convert
-// @param	number	$base		The rem base (optional)
-// @return	number	Rems
+/// Convert given pixels to rems
+/// @param	number	$pixels		The pixels to convert
+/// @param	number	$base		The rem base (optional)
+/// @return	number	Rems
 @function calc-rems($pixels, $base: $rem-base) {
 	$rems: ((parse-int($pixels) / $base) * 1rem);
 
@@ -27,10 +27,10 @@
 	@return $rems;
 }
 
-// Convert given rems to pixels
-// @param	number	$rems	The rems to convert
-// @param	number	$base	The rem base (optional).
-// @return	number	Pixels
+/// Convert given rems to pixels
+/// @param	number	$rems	The rems to convert
+/// @param	number	$base	The rem base (optional).
+/// @return	number	Pixels
 @function calc-pixels($rems, $base: $rem-base) {
 	$pixels: ((parse-int($rems) * $base) * 1px);
 
