@@ -6,7 +6,7 @@ class TestCss < Minitest::Test
     Dir.mkdir('build') unless Dir.exist?('build')
 
     @files = {
-      :input  => 'scss/grids.scss',
+      :input  => 'scss/main.scss',
       :output => 'build/grids.css'
     }
   end
