@@ -11,49 +11,48 @@
 .container {
 	@extend .container-fluid;
 
-	@each $key, $value in $column-class {
-		@if ($key != 'base' and $key != 'xsmall') {
-			@include responsive(min-width, map-get($viewport, $key)) {
-				@include rem(max-width, map-get($viewport-size, $key));
+	@each $key, $value in $grid-breakpoints {
+		@include responsive(min-width, calc-rems($value, $rem-base)) {
+			@if map-has-key($container-max-widths, $key) {
+				@include rem(max-width, map-get($container-max-widths, $key));
 			}
 		}
 	}
 }
 
 .row {
+	display: flex;
+	flex-wrap: wrap;
 	overflow: hidden;
 	@include rem(margin-left, (map-get($grid, 'spacing') * -1));
 	@include rem(margin-right, (map-get($grid, 'spacing') * -1));
-	@extend .clearfix;
 }
 
-@each $key, $value in $column-class {
-	$class: '#{map-get($column-class, 'base')}-#{$value}';
+%grid-column {
+	position: relative;
+	min-height: 1px;
+	overflow: hidden;
+	@include rem(padding-left, map-get($grid, 'spacing'));
+	@include rem(padding-right, map-get($grid, 'spacing'));
+}
 
-	@if ($key == 'base') {
-		$class: '#{$value}';
+@each $key, $value in $grid-breakpoints {
+	@for $column from 1 through map-get($grid, 'columns') {
+		.col-#{$key}-#{$column} {
+			@extend %grid-column;
+		}
 	}
 
-	@if ($key == 'base') {
-		[class*="#{$class}-"] {
-			position: relative;
-			overflow: hidden;
-			@include rem(padding-left, map-get($grid, 'spacing'));
-			@include rem(padding-right, map-get($grid, 'spacing'));
-		}
-	} @else if ($key == 'xsmall') {
-		[class*="#{$class}-"] {
-			float: left;
-		}
+	.col-#{$key},
+	.col-#{$key}-auto {
+		@extend %grid-column;
+	}
 
-		@include grid-columns($class, map-get($grid, 'columns'));
+	@if (parse-int($value) > 0) {
+		@include responsive(min-width, calc-rems($value, $rem-base)) {
+			@include grid-columns($key, map-get($grid, 'columns'));
+		}
 	} @else {
-		@include responsive(min-width, map-get($viewport, $key)) {
-			[class*="#{$class}-"] {
-				float: left;
-			}
-
-			@include grid-columns($class, map-get($grid, 'columns'));
-		}
+		@include grid-columns($key, map-get($grid, 'columns'));
 	}
 }

@@ -7,9 +7,9 @@
 
 /// Define a media query to set style rules depending
 /// on the device's viewport
-/// @param	$viewport	The visible area of the screen
-/// @param	$size		The viewport size
-/// @content	SCSS/CSS code
+/// @param $viewport	The visible area of the screen
+/// @param $size		The viewport size
+/// @content SCSS/CSS code
 @mixin responsive($viewport, $size) {
 	@media only screen and
 	(#{$viewport}: $size),
@@ -19,46 +19,39 @@
 }
 
 /// Generate a CSS class for every viewport size
-/// @param	$class		The class name of the viewport
-/// @param	$columns	Total number of columns
-@mixin grid-columns($class, $columns) {
-	@for $column from 0 through $columns {
-		@if $column > 0 {
-			.#{$class}-#{$column} {
-				width: grid-width($column, $columns);
-			}
-		}
+/// @param $breakpoint	Breakpoint name
+/// @param $columns		Total number of columns
+@mixin grid-columns($breakpoint, $columns) {
+	.col-#{$breakpoint} {
+		flex-basis: 0;
+		flex-grow: 1;
+		max-width: 100%;
+	}
 
-		.#{$class}-pull-#{$column} {
-			@if $column > 0 {
-				right: grid-width($column, $columns);
-			} @else {
-				right: auto; // Reset
-			}
-		}
+	.col-#{$breakpoint}-auto {
+		flex: 0 0 auto;
+		width: auto;
+		max-width: none;
+	}
 
-		.#{$class}-push-#{$column} {
-			@if $column > 0 {
-				left: grid-width($column, $columns);
-			} @else {
-				left: auto; // Reset
-			}
+	@for $column from 1 through $columns {
+		.col-#{$breakpoint}-#{$column} {
+			flex: grid-width($column, $columns);
+			max-width: grid-width($column, $columns);
 		}
+	}
 
-		.#{$class}-offset-#{$column} {
-			@if $column > 0 {
-				margin-left: grid-width($column, $columns);
-			} @else {
-				margin-left: 0; // Reset
-			}
+	@for $column from 1 through $columns {
+		.order-#{$breakpoint}-#{$column} {
+			order: $column;
 		}
 	}
 }
 
 /// Slightly modified version of the rem() mixin by Hugo Giraudel
 /// http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
-/// @param	$property	The property which will receive the values
-/// @param	$values		Values which will be assigned to the property
+/// @param $property	The property which will receive the values
+/// @param $values		Values which will be assigned to the property
 @mixin rem($property, $values) {
 	$px : ();
 	$rem: ();

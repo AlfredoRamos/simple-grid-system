@@ -1,22 +1,22 @@
 /// Get grid width
-/// @param	number	$column		Current column index
-/// @param	numer	$columns	Number of columns
-/// @return	number	Percentage
+/// @param number $column	Current column index
+/// @param number $columns	Number of columns
+/// @return number Percentage
 @function grid-width($column, $columns) {
 	@return ($column * (100% / $columns));
 }
 
 /// Convert a given value to integer
-/// @param	$n		The value to convert
-/// @param	number	Unitless
+/// @param $n	The value to convert
+/// @return number Unitless
 @function parse-int($n) {
 	@return ($n / (($n * 0) + 1));
 }
 
 /// Convert given pixels to rems
-/// @param	number	$pixels		The pixels to convert
-/// @param	number	$base		The rem base
-/// @return	number	Rems
+/// @param number $pixels	The pixels to convert
+/// @param number $base		The rem base
+/// @return number Rems
 @function calc-rems($pixels, $base) {
 	$rems: ((parse-int($pixels) / $base) * 1rem);
 
@@ -28,9 +28,9 @@
 }
 
 /// Convert given rems to pixels
-/// @param	number	$rems	The rems to convert
-/// @param	number	$base	The rem base
-/// @return	number	Pixels
+/// @param number $rems	The rems to convert
+/// @param number $base	The rem base
+/// @return number Pixels
 @function calc-pixels($rems, $base) {
 	$pixels: ((parse-int($rems) * $base) * 1px);
 

@@ -1,38 +1,29 @@
 /// Grid settings
-/// @type	list
+/// @type list
 $grid: (
 	'columns': 12,
 	'spacing': 1rem
 );
 
-/// REM base
-/// Usually 1rem = 16px
-/// @type	number
+/// Rem base in pixels
+/// @type number
 $rem-base: 16;
 
-/// CSS class names
-/// @type	list
-$column-class: (
-	'base':		'col',	// Base (without dot)
-	'xsmall':	'xs',
-	'small':	'sm',
-	'medium':	'md',
-	'large':	'lg'
+/// Grid system breakpoints in pixels
+/// @type list
+$grid-breakpoints: (
+	xs: 0px,
+	sm:	576px,
+	md:	768px,
+	lg:	992px,
+	xl: 1200px
 );
 
-/// Media queries viewports
-/// @type	list
-$viewport: (
-	'xsmall':	((480 / $rem-base) * 1rem),
-	'small':	((768 / $rem-base) * 1rem),
-	'medium':	((992 / $rem-base) * 1rem),
-	'large':	((1200 / $rem-base) * 1rem)
-);
-
-/// Maximum width
-/// @type	list
-$viewport-size: (
-	'small':	((750 / $rem-base) * 1rem),
-	'medium':	((970 / $rem-base) * 1rem),
-	'large':	((1170 / $rem-base) * 1rem)
+/// Container maximum widths in pixels
+/// @type list
+$container-max-widths: (
+	sm:	540px,
+	md:	720px,
+	lg:	960px,
+	xl: 1140px
 );
