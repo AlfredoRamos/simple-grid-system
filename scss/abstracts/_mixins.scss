@@ -6,19 +6,19 @@
 }
 
 /// Define a media query to set style rules depending
-/// on the device's viewport
-/// @param $viewport	The visible area of the screen
-/// @param $size		The viewport size
+/// on the device's breakpoint
+/// @param $breakpoint	The visible area of the screen
+/// @param $size		The breakpoint size
 /// @content SCSS/CSS code
-@mixin responsive($viewport, $size) {
+@mixin responsive($breakpoint, $size) {
 	@media only screen and
-	(#{$viewport}: $size),
-	(#{$viewport}: calc-pixels($size, $rem-base)) {
+	(#{$breakpoint}: $size),
+	(#{$breakpoint}: calc-pixels($size, $rem-base)) {
 		@content;
 	}
 }
 
-/// Generate a CSS class for every viewport size
+/// Generate a CSS class for every breakpoint
 /// @param $breakpoint	Breakpoint name
 /// @param $columns		Total number of columns
 @mixin grid-columns($breakpoint, $columns) {
