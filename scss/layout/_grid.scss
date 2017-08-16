@@ -30,6 +30,7 @@
 
 %grid-column {
 	position: relative;
+	width: 100%;
 	min-height: 1px;
 	overflow: hidden;
 	@include rem(padding-left, map-get($grid, 'spacing'));

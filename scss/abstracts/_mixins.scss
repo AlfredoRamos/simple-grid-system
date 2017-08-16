@@ -22,6 +22,7 @@
 /// @param $breakpoint	Breakpoint name
 /// @param $columns		Total number of columns
 @mixin grid-columns($breakpoint, $columns) {
+	// Width
 	.col-#{$breakpoint} {
 		flex-basis: 0;
 		flex-grow: 1;
@@ -36,14 +37,48 @@
 
 	@for $column from 1 through $columns {
 		.col-#{$breakpoint}-#{$column} {
-			flex: grid-width($column, $columns);
+			flex: 0 0 grid-width($column, $columns);
 			max-width: grid-width($column, $columns);
 		}
 	}
 
+	// Order
 	@for $column from 1 through $columns {
 		.order-#{$breakpoint}-#{$column} {
 			order: $column;
+		}
+	}
+
+	// Offset
+	@for $column from 0 through $columns {
+		.offset-#{$breakpoint}-#{$column} {
+			@if ($column > 0) {
+				margin-left: grid-width($column, $columns);
+			} @else {
+				margin-left: auto; // Reset
+			}
+		}
+	}
+
+	// Push
+	@for $column from 0 through $columns {
+		.push-#{$breakpoint}-#{$column} {
+			@if ($column > 0) {
+				left: grid-width($column, $columns);
+			} @else {
+				left: auto; // Reset
+			}
+		}
+	}
+
+	// Pull
+	@for $column from 1 through $columns {
+		.pull-#{$breakpoint}-#{$column} {
+			@if ($column > 0) {
+				right: grid-width($column, $columns);
+			} @else {
+				right: auto; // Reset
+			}
 		}
 	}
 }

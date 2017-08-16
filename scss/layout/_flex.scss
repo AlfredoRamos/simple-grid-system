@@ -1,0 +1,13 @@
+// Vertical alignment
+@each $align in (start, center, end) {
+	.vertical-align-#{$align} {
+		align-items: flex-#{$align};
+	}
+}
+
+// Horizontal alignment
+@each $align in (start, center, end, around, between) {
+	.horizontal-align-#{$align} {
+		justify-content: flex-#{$align};
+	}
+}
