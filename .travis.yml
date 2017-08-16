@@ -9,6 +9,7 @@ matrix:
 branches:
   only:
     - master
+    - flexbox
 
 before_install:
   - gem update --system
