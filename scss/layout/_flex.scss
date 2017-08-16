@@ -1,13 +1,36 @@
+// Flex alignments
+$flex-align: (
+	vertical: (
+		start: flex-start,
+		center: center,
+		end: flex-end
+	),
+	horizontal: (
+		start: flex-start,
+		center: center,
+		end: flex-end,
+		around:space-around,
+		between: space-between
+	)
+);
+
+// Order
+@for $column from 1 through map-get($grid, columns) {
+	.order-#{$column} {
+		order: $column;
+	}
+}
+
 // Vertical alignment
-@each $align in (start, center, end) {
-	.vertical-align-#{$align} {
-		align-items: flex-#{$align};
+@each $key, $value in map-get($flex-align, vertical) {
+	.vertical-align-#{$key} {
+		align-items: $value;
 	}
 }
 
 // Horizontal alignment
-@each $align in (start, center, end, around, between) {
-	.horizontal-align-#{$align} {
-		justify-content: flex-#{$align};
+@each $key, $value in map-get($flex-align, horizontal) {
+	.horizontal-align-#{$key} {
+		justify-content: $value;
 	}
 }

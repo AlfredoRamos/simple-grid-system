@@ -42,13 +42,6 @@
 		}
 	}
 
-	// Order
-	@for $column from 1 through $columns {
-		.order-#{$breakpoint}-#{$column} {
-			order: $column;
-		}
-	}
-
 	// Offset
 	@for $column from 0 through $columns {
 		.offset-#{$breakpoint}-#{$column} {
