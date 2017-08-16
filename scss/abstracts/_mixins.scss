@@ -54,6 +54,39 @@
 	}
 }
 
+/// Generate a CSS class for every breakpoint
+/// @param $breakpoint	Breakpoint name
+@mixin flex-alignments($breakpoint) {
+	$flex-align: (
+		vertical: (
+			top: flex-start,
+			middle: center,
+			bottom: flex-end
+		),
+		horizontal: (
+			start: flex-start,
+			center: center,
+			end: flex-end,
+			around: space-around,
+			between: space-between
+		)
+	);
+
+	// Vertical
+	@each $key, $value in map-get($flex-align, vertical) {
+		.#{$key}-#{$breakpoint} {
+			align-items: $value;
+		}
+	}
+
+	// Horizontal
+	@each $key, $value in map-get($flex-align, horizontal) {
+		.#{$key}-#{$breakpoint} {
+			justify-content: $value;
+		}
+	}
+}
+
 /// Slightly modified version of the rem() mixin by Hugo Giraudel
 /// http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
 /// @param $property	The property which will receive the values
