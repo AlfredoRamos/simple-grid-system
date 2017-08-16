@@ -9,6 +9,7 @@ matrix:
 branches:
   only:
     - master
+    - float-layout
 
 before_install:
   - gem update --system
