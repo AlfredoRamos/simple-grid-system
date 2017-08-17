@@ -1,5 +1,5 @@
 // Container
-.container-fluid {
+%container {
 	margin-left: auto;
 	margin-right: auto;
 	overflow: hidden;
@@ -9,8 +9,12 @@
 	@include rem(padding-right, map-get($grid, spacing));
 }
 
+.container-fluid {
+	@extend %container;
+}
+
 .container {
-	@extend .container-fluid;
+	@extend %container;
 
 	@each $key, $value in $grid-breakpoints {
 		@include responsive(min-width, calc-rems($value, $rem-base)) {
@@ -55,8 +59,10 @@
 	@if (parse-int($value) > 0) {
 		@include responsive(min-width, calc-rems($value, $rem-base)) {
 			@include grid-columns($key, map-get($grid, columns));
+			@include flex-helpers($key, map-get($grid, columns));
 		}
 	} @else {
 		@include grid-columns($key, map-get($grid, columns));
+		@include flex-helpers($key, map-get($grid, columns));
 	}
 }

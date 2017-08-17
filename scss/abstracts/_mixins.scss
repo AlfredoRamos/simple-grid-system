@@ -41,32 +41,13 @@
 			max-width: grid-width($column, $columns);
 		}
 	}
-
-	// Offset
-	@for $column from 0 through $columns {
-		.offset-#{$breakpoint}-#{$column} {
-			@if ($column > 0) {
-				margin-left: grid-width($column, $columns);
-			} @else {
-				margin-left: auto; // Reset
-			}
-		}
-	}
 }
 
-/// Generate CSS classes for flex ordering
+/// Generate CSS classes for flex ordering,
+/// alignments and offsets
 /// @param $breakpoint	Breakpoint name
-@mixin flex-ordering($breakpoint) {
-	@for $column from 1 through map-get($grid, columns) {
-		.order-#{$breakpoint}-#{$column} {
-			order: $column;
-		}
-	}
-}
-
-/// Generate CSS classes for flex alignments
-/// @param $breakpoint	Breakpoint name
-@mixin flex-alignments($breakpoint) {
+/// @param $columns		Total number of columns
+@mixin flex-helpers($breakpoint, $columns) {
 	$flex-align: (
 		vertical: (
 			top: flex-start,
@@ -82,17 +63,35 @@
 		)
 	);
 
-	// Vertical
+	// Order
+	@for $column from 1 through map-get($grid, columns) {
+		.order-#{$breakpoint}-#{$column} {
+			order: $column;
+		}
+	}
+
+	// Vertical alignment
 	@each $key, $value in map-get($flex-align, vertical) {
 		.#{$key}-#{$breakpoint} {
 			align-items: $value;
 		}
 	}
 
-	// Horizontal
+	// Horizontal alignment
 	@each $key, $value in map-get($flex-align, horizontal) {
 		.#{$key}-#{$breakpoint} {
 			justify-content: $value;
+		}
+	}
+
+	// Offset
+	@for $column from 0 through $columns {
+		.offset-#{$breakpoint}-#{$column} {
+			@if ($column > 0) {
+				margin-left: grid-width($column, $columns);
+			} @else {
+				margin-left: auto; // Reset
+			}
 		}
 	}
 }
