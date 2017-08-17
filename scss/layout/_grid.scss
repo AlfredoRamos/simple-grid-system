@@ -9,17 +9,18 @@
 	@include rem(padding-right, map-get($grid, spacing));
 }
 
-.container-fluid {
-	@extend %container;
-}
-
 .container {
-	@extend %container;
+	&,
+	&-fluid {
+		@extend %container;
+	}
 
-	@each $key, $value in $grid-breakpoints {
-		@include responsive(min-width, calc-rems($value, $rem-base)) {
-			@if map-has-key($container-max-widths, $key) {
-				@include rem(max-width, map-get($container-max-widths, $key));
+	& {
+		@each $key, $value in $grid-breakpoints {
+			@include responsive(min-width, calc-rems($value, $rem-base)) {
+				@if map-has-key($container-max-widths, $key) {
+					@include rem(max-width, map-get($container-max-widths, $key));
+				}
 			}
 		}
 	}
