@@ -18,7 +18,7 @@
 	}
 }
 
-/// Generate a CSS class for every breakpoint
+/// Generate CSS classes for grid columns
 /// @param $breakpoint	Breakpoint name
 /// @param $columns		Total number of columns
 @mixin grid-columns($breakpoint, $columns) {
@@ -54,7 +54,17 @@
 	}
 }
 
-/// Generate a CSS class for every breakpoint
+/// Generate CSS classes for flex ordering
+/// @param $breakpoint	Breakpoint name
+@mixin flex-ordering($breakpoint) {
+	@for $column from 1 through map-get($grid, columns) {
+		.order-#{$breakpoint}-#{$column} {
+			order: $column;
+		}
+	}
+}
+
+/// Generate CSS classes for flex alignments
 /// @param $breakpoint	Breakpoint name
 @mixin flex-alignments($breakpoint) {
 	$flex-align: (

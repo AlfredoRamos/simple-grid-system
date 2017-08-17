@@ -1,12 +1,14 @@
-// Order
-@for $column from 1 through map-get($grid, columns) {
-	.order-#{$column} {
-		order: $column;
-	}
-}
-
-// Flex alignment
 @each $key, $value in $grid-breakpoints {
+	// Ordering
+	@if (parse-int($value) > 0) {
+		@include responsive(min-width, calc-rems($value, $rem-base)) {
+			@include flex-ordering($key);
+		}
+	} @else {
+		@include flex-ordering($key);
+	}
+
+	// Alignments
 	@if (parse-int($value) > 0) {
 		@include responsive(min-width, calc-rems($value, $rem-base)) {
 			@include flex-alignments($key);
