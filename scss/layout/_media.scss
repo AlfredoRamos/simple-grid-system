@@ -8,19 +8,19 @@
 	// 16:9 aspect ratio
 	&,
 	&-16-9 {
-		padding-bottom: ((9 / 16) * 100%);
+		padding-bottom: percentage(9/16);
 	}
 
 	// 4:3 aspect ratio
 	&-4-3 {
-		padding-bottom: ((3 / 4) * 100%);
+		padding-bottom: percentage(3/4);
 	}
 
 	video,
 	iframe,
 	object,
 	embed,
-	& &-item {
+	&-item {
 		width: 100%;
 		height: 100%;
 		border: 0;

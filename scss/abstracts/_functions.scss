@@ -1,11 +1,3 @@
-/// Get grid width
-/// @param number $column	Current column index
-/// @param number $columns	Number of columns
-/// @return number Percentage
-@function grid-width($column, $columns) {
-	@return ($column * (100% / $columns));
-}
-
 /// Convert a given value to integer
 /// @param $n	The value to convert
 /// @return number Unitless

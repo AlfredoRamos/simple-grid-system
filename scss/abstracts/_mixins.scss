@@ -37,8 +37,8 @@
 
 	@for $column from 1 through $columns {
 		.col-#{$breakpoint}-#{$column} {
-			flex: 0 0 grid-width($column, $columns);
-			max-width: grid-width($column, $columns);
+			flex: 0 0 percentage($column / $columns);
+			max-width: percentage($column / $columns);
 		}
 	}
 }
@@ -88,7 +88,7 @@
 	@for $column from 0 through $columns {
 		.offset-#{$breakpoint}-#{$column} {
 			@if ($column > 0) {
-				margin-left: grid-width($column, $columns);
+				margin-left: percentage($column / $columns);
 			} @else {
 				margin-left: auto; // Reset
 			}
