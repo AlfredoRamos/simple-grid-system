@@ -87,36 +87,42 @@
 }
 
 /// Cross-browser support for the flex property
-@mixin flex($value) {
-	-ms-flex: $value;
-	flex: $value;
+/// @param list $value	List of values
+@mixin flex($list) {
+	-ms-flex: $list;
+	flex: $list;
 }
 
 /// Cross-browser support for the flex-wrap property
-@mixin flex-wrap($value) {
-	-ms-flex-wrap: $value;
-	flex-wrap: $value;
+/// @param string $value	Wrap style
+@mixin flex-wrap($style) {
+	-ms-flex-wrap: $style;
+	flex-wrap: $style;
 }
 
 /// Cross-browser support for the flex-basis property
-@mixin flex-basis($value) {
-	-ms-flex-preferred-size: $value;
-	flex-basis: $value;
+/// @param number $number	Length
+@mixin flex-basis($number) {
+	-ms-flex-preferred-size: $number;
+	flex-basis: $number;
 }
 
 /// Cross-browser support for the flex-grow property
-@mixin flex-grow($value) {
-	-ms-flex-positive: 1;
-	flex-grow: 1;
+/// @param number $number	Length
+@mixin flex-grow($number) {
+	-ms-flex-positive: $number;
+	flex-grow: $number;
 }
 
 /// Cross-browser support for the flex order property
+/// @param number $order	Order within the container
 @mixin flex-order($order) {
 	-ms-flex-order: $order;
 	order: $order;
 }
 
 /// Cross browser support for flex alignments
+/// @param string $position	Position name
 @mixin flex-align($position) {
 	// Vertical
 	@if ($position == top) {
