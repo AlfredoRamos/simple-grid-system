@@ -14,24 +14,20 @@
 @mixin grid-columns($breakpoint, $columns: map-get($grid, columns)) {
 	// Width
 	.col-#{$breakpoint} {
-		-ms-flex-preferred-size: 0;
-		flex-basis: 0;
-		-ms-flex-positive: 1;
-		flex-grow: 1;
+		@include flex-basis(0);
+		@include flex-grow(1);
 		max-width: 100%;
 	}
 
 	.col-#{$breakpoint}-auto {
-		-ms-flex: 0 0 auto;
-		flex: 0 0 auto;
+		@include flex(0 0 auto);
 		width: auto;
 		max-width: none;
 	}
 
 	@for $column from 1 through $columns {
 		.col-#{$breakpoint}-#{$column} {
-			-ms-flex: 0 0 percentage($column / $columns);
-			flex: 0 0 percentage($column / $columns);
+			@include flex(0 0 percentage($column / $columns));
 			max-width: percentage($column / $columns);
 		}
 	}
@@ -42,63 +38,24 @@
 /// @param string	$breakpoint	Breakpoint name
 /// @param number	$columns	Total number of columns
 @mixin flex-helpers($breakpoint, $columns: map-get($grid, columns)) {
-	$flex-align: (
-		vertical: (
-			top: flex-start,
-			middle: center,
-			bottom: flex-end
-		),
-		horizontal: (
-			start: flex-start,
-			center: center,
-			end: flex-end,
-			around: space-around,
-			between: space-between
-		)
-	);
-
-	$flex-align-ie: (
-		vertical: (
-			top: start,
-			bottom: end
-		),
-		horizontal: (
-			start: start,
-			end: end,
-			around: distribute,
-			between: justify
-		)
-	);
-
 	// Order
 	@for $column from 1 through map-get($grid, columns) {
 		.order-#{$breakpoint}-#{$column} {
-			-ms-flex-order: $column;
-			order: $column;
+			@include flex-order($column);
 		}
 	}
 
 	// Vertical alignment
-	@each $key, $value in map-get($flex-align, vertical) {
+	@each $key in (top, middle, bottom) {
 		.#{$key}-#{$breakpoint} {
-			@if map-has-key(map-get($flex-align-ie, vertical), $key) {
-				-ms-flex-align: map-get(map-get($flex-align-ie, vertical), $key);
-			} @else {
-				-ms-flex-align: $value;
-			}
-			align-items: $value;
+			@include flex-align($key);
 		}
 	}
 
 	// Horizontal alignment
-	@each $key, $value in map-get($flex-align, horizontal) {
+	@each $key, $value in (start, center, end, around, between) {
 		.#{$key}-#{$breakpoint} {
-			@if map-has-key(map-get($flex-align-ie, horizontal), $key) {
-				-ms-flex-pack: map-get(map-get($flex-align-ie, horizontal), $key);
-			} @else {
-				-ms-flex-pack: $value;
-			}
-			justify-content: $value;
+			@include flex-align($key);
 		}
 	}
 
@@ -111,5 +68,83 @@
 				margin-left: auto; // Reset
 			}
 		}
+	}
+}
+
+/// Cross-browser support for border-box value
+/// for the box-sizing property
+@mixin border-box {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/// Cross-browser support for flex value
+/// for the display property
+@mixin display-flex {
+	display: -ms-flexbox;
+	display: flex;
+}
+
+/// Cross-browser support for the flex property
+@mixin flex($value) {
+	-ms-flex: $value;
+	flex: $value;
+}
+
+/// Cross-browser support for the flex-wrap property
+@mixin flex-wrap($value) {
+	-ms-flex-wrap: $value;
+	flex-wrap: $value;
+}
+
+/// Cross-browser support for the flex-basis property
+@mixin flex-basis($value) {
+	-ms-flex-preferred-size: $value;
+	flex-basis: $value;
+}
+
+/// Cross-browser support for the flex-grow property
+@mixin flex-grow($value) {
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+}
+
+/// Cross-browser support for the flex order property
+@mixin flex-order($order) {
+	-ms-flex-order: $order;
+	order: $order;
+}
+
+/// Cross browser support for flex alignments
+@mixin flex-align($position) {
+	// Vertical
+	@if ($position == top) {
+		-ms-flex-align: start;
+		align-items: flex-start;
+	} @else if ($position == middle) {
+		-ms-flex-align: center;
+		align-items: center;
+	} @else if ($position == bottom) {
+		-ms-flex-align: flex-end;
+		align-items: end;
+	}
+
+	// Horizontal
+	@if ($position == start) {
+		-ms-flex-pack: start;
+		justify-content: flex-start;
+	} @else if ($position == center) {
+		-ms-flex-pack: center;
+		justify-content: center;
+	} @else if ($position == end) {
+		-ms-flex-pack: end;
+		justify-content: flex-end;
+	} @else if ($position == around) {
+		-ms-flex-pack: distribute;
+		justify-content: space-around;
+	} @else if ($position == between) {
+		-ms-flex-pack: justify;
+		justify-content: space-between;
 	}
 }

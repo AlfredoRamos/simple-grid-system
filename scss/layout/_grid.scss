@@ -28,10 +28,8 @@
 
 // Row
 .row {
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
+	@include display-flex;
+	@include flex-wrap(wrap);
 	overflow: hidden;
 	margin-left: get-rems((map-get($grid, spacing) * -1));
 	margin-right: get-rems((map-get($grid, spacing) * -1));
