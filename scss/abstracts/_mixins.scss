@@ -14,12 +14,15 @@
 @mixin grid-columns($breakpoint, $columns: map-get($grid, columns)) {
 	// Width
 	.col-#{$breakpoint} {
+		-ms-flex-preferred-size: 0;
 		flex-basis: 0;
+		-ms-flex-positive: 1;
 		flex-grow: 1;
 		max-width: 100%;
 	}
 
 	.col-#{$breakpoint}-auto {
+		-ms-flex: 0 0 auto;
 		flex: 0 0 auto;
 		width: auto;
 		max-width: none;
@@ -27,6 +30,7 @@
 
 	@for $column from 1 through $columns {
 		.col-#{$breakpoint}-#{$column} {
+			-ms-flex: 0 0 percentage($column / $columns);
 			flex: 0 0 percentage($column / $columns);
 			max-width: percentage($column / $columns);
 		}
@@ -53,9 +57,23 @@
 		)
 	);
 
+	$flex-align-ie: (
+		vertical: (
+			top: start,
+			bottom: end
+		),
+		horizontal: (
+			start: start,
+			end: end,
+			around: distribute,
+			between: justify
+		)
+	);
+
 	// Order
 	@for $column from 1 through map-get($grid, columns) {
 		.order-#{$breakpoint}-#{$column} {
+			-ms-flex-order: $column;
 			order: $column;
 		}
 	}
@@ -63,6 +81,11 @@
 	// Vertical alignment
 	@each $key, $value in map-get($flex-align, vertical) {
 		.#{$key}-#{$breakpoint} {
+			@if map-has-key(map-get($flex-align-ie, vertical), $key) {
+				-ms-flex-align: map-get(map-get($flex-align-ie, vertical), $key);
+			} @else {
+				-ms-flex-align: $value;
+			}
 			align-items: $value;
 		}
 	}
@@ -70,6 +93,11 @@
 	// Horizontal alignment
 	@each $key, $value in map-get($flex-align, horizontal) {
 		.#{$key}-#{$breakpoint} {
+			@if map-has-key(map-get($flex-align-ie, horizontal), $key) {
+				-ms-flex-pack: map-get(map-get($flex-align-ie, horizontal), $key);
+			} @else {
+				-ms-flex-pack: $value;
+			}
 			justify-content: $value;
 		}
 	}
