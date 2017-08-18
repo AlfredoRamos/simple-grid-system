@@ -1,20 +1,17 @@
-/// Define a media query to set style rules depending
-/// on the device's breakpoint
-/// @param $breakpoint	The visible area of the screen
-/// @param $size		The breakpoint size
+/// Generate a dynamic media query
+/// @param string	$property		Property name
+/// @param number	$breakpoint		Breakpoint size
 /// @content SCSS/CSS code
-@mixin responsive($breakpoint, $size) {
-	@media only screen and
-	(#{$breakpoint}: $size),
-	(#{$breakpoint}: calc-pixels($size, $rem-base)) {
+@mixin responsive($property, $breakpoint) {
+	@media only screen and (#{$property}: get-rems($breakpoint)) {
 		@content;
 	}
 }
 
 /// Generate CSS classes for grid columns
-/// @param $breakpoint	Breakpoint name
-/// @param $columns		Total number of columns
-@mixin grid-columns($breakpoint, $columns) {
+/// @param string	$breakpoint	Breakpoint name
+/// @param number	$columns	Total number of columns
+@mixin grid-columns($breakpoint, $columns: map-get($grid, columns)) {
 	// Width
 	.col-#{$breakpoint} {
 		flex-basis: 0;
@@ -38,9 +35,9 @@
 
 /// Generate CSS classes for flex ordering,
 /// alignments and offsets
-/// @param $breakpoint	Breakpoint name
-/// @param $columns		Total number of columns
-@mixin flex-helpers($breakpoint, $columns) {
+/// @param string	$breakpoint	Breakpoint name
+/// @param number	$columns	Total number of columns
+@mixin flex-helpers($breakpoint, $columns: map-get($grid, columns)) {
 	$flex-align: (
 		vertical: (
 			top: flex-start,
@@ -86,38 +83,5 @@
 				margin-left: auto; // Reset
 			}
 		}
-	}
-}
-
-/// Slightly modified version of the rem() mixin by Hugo Giraudel
-/// http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
-/// @param $property	The property which will receive the values
-/// @param $values		Values which will be assigned to the property
-@mixin rem($property, $values) {
-	$px : ();
-	$rem: ();
-
-	@each $value in $values {
-		@if $value == 0 or $value == auto {
-			$px : append($px , $value);
-			$rem: append($rem, $value);
-		} @else {
-			@if unit($value) == 'px' {
-				$px : append($px,  calc-pixels($value, $rem-base));
-				$rem: append($rem, calc-rems($value, $rem-base));
-			}
-
-			@if unit($value) == 'rem' {
-				$px : append($px,  calc-pixels($value, $rem-base));
-				$rem: append($rem, calc-rems($value, $rem-base));
-			}
-		}
-	}
-
-	@if $px == $rem {
-		#{$property}: $px;
-	} @else {
-		#{$property}: $px; // For IE < 8
-		#{$property}: $rem;
 	}
 }

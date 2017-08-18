@@ -4,9 +4,9 @@
 	margin-right: auto;
 	overflow: hidden;
 	word-wrap: break-word;
-	@include rem(margin-bottom, map-get($grid, spacing));
-	@include rem(padding-left, map-get($grid, spacing));
-	@include rem(padding-right, map-get($grid, spacing));
+	margin-bottom: get-rems(map-get($grid, spacing));
+	padding-left: get-rems(map-get($grid, spacing));
+	padding-right: get-rems(map-get($grid, spacing));
 }
 
 .container {
@@ -17,9 +17,9 @@
 
 	& {
 		@each $key, $value in $grid-breakpoints {
-			@include responsive(min-width, calc-rems($value, $rem-base)) {
+			@include responsive(min-width, $value) {
 				@if map-has-key($container-max-widths, $key) {
-					@include rem(max-width, map-get($container-max-widths, $key));
+					max-width: get-rems(map-get($container-max-widths, $key));
 				}
 			}
 		}
@@ -31,18 +31,18 @@
 	display: flex;
 	flex-wrap: wrap;
 	overflow: hidden;
-	@include rem(margin-left, (map-get($grid, spacing) * -1));
-	@include rem(margin-right, (map-get($grid, spacing) * -1));
+	margin-left: get-rems((map-get($grid, spacing) * -1));
+	margin-right: get-rems((map-get($grid, spacing) * -1));
 }
 
 // Columns
 %grid-column {
 	position: relative;
 	width: 100%;
-	min-height: 1px;
+	min-height: get-rems(1px);
 	overflow: hidden;
-	@include rem(padding-left, map-get($grid, spacing));
-	@include rem(padding-right, map-get($grid, spacing));
+	padding-left: get-rems(map-get($grid, spacing));
+	padding-right: get-rems(map-get($grid, spacing));
 }
 
 @each $key, $value in $grid-breakpoints {
@@ -57,13 +57,13 @@
 		@extend %grid-column;
 	}
 
-	@if (parse-int($value) > 0) {
-		@include responsive(min-width, calc-rems($value, $rem-base)) {
-			@include grid-columns($key, map-get($grid, columns));
-			@include flex-helpers($key, map-get($grid, columns));
+	@if (get-number($value) > 0) {
+		@include responsive(min-width, $value) {
+			@include grid-columns($key);
+			@include flex-helpers($key);
 		}
 	} @else {
-		@include grid-columns($key, map-get($grid, columns));
-		@include flex-helpers($key, map-get($grid, columns));
+		@include grid-columns($key);
+		@include flex-helpers($key);
 	}
 }
