@@ -2,6 +2,6 @@
 	&,
 	&::before,
 	&::after {
-		@include border-box;
+		box-sizing: border-box;
 	}
 }

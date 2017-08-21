@@ -1,5 +1,5 @@
 // Responsive embeds
-.responsive-media {
+.media {
 	height: 0;
 	overflow: hidden;
 	position: relative;
@@ -16,18 +16,24 @@
 		padding-bottom: percentage(3/4);
 	}
 
-	video,
-	iframe,
-	object,
-	embed,
-	&-item {
+	%media-item {
+		position: absolute;
 		width: 100%;
 		height: 100%;
 		border: 0;
-		position: absolute;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
+	}
+
+	@each $item in (video, iframe, object, embed) {
+		#{$item} {
+			@extend %media-item;
+		}
+	}
+
+	&-item {
+		@extend %media-item;
 	}
 }
