@@ -8,22 +8,29 @@ Precompiled CSS files (`grids.css` and `grids.min.css`) can be found in [this gi
 
 ### Dependencies
 
-- SASS processor [[docs](http://sass-lang.com/install)]
+- `ruby` >= 2.2.0
+- `bundler` [[info](https://bundler.io/)]
+
+For a list of gem dependencies, see the [Gemfile](https://github.com/AlfredoRamos/simple-grid-system/blob/master/Gemfile).
 
 ### Build
 
-Create `build` directory:
+First off run `bundler install` to install all required gems, then generate the CSS files using `rake` tasks:
+
+**Normal**
 
 ```shell
-mkdir build
+rake build:css
 ```
 
-Using `sass` Ruby gem:
+**Minified**
 
 ```shell
-sass -Ct expanded scss/main.scss build/grids.css --sourcemap=none
+rake build:minified
 ```
 
+**Both**
+
 ```shell
-sass -Ct compressed scss/main.scss build/grids.min.css --sourcemap=none
+rake build:all
 ```
