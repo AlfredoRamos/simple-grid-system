@@ -1,4 +1,6 @@
 require 'minitest/autorun'
+require 'sass'
+require 'autoprefixer-rails'
 
 class TestCss < Minitest::Test
 
@@ -6,22 +8,45 @@ class TestCss < Minitest::Test
     Dir.mkdir('build') unless Dir.exist?('build')
 
     @files = {
-      :input  => 'scss/main.scss',
-      :output => 'build/grids.css'
+      input: 'scss/main.scss',
+      temp: 'build/grids.tmp.css',
+      output: 'build/grids.css'
     }
   end
 
   def test_css_file
     # Create CSS file
-    system('sass -Ct compressed %1$s %2$s --sourcemap=none' % [
-      @files[:input],
-      @files[:output]
-    ])
+    File.open(@files[:temp], 'w') do |f|
+      f.puts Sass::Engine.new(File.read(@files[:input]), {
+        style: :expanded,
+        cache: false,
+        syntax: :scss,
+        filename: @files[:input],
+        sourcemap: :none
+      }).render
+    end
 
-    # Check the previous command exit code
-    assert_same(0, $?.to_i)
+    # Create vendor-prefixed CSS file
+    File.open(@files[:output], 'w') do |f|
+      f.puts AutoprefixerRails.process(File.read(@files[:temp]), {
+        map: false,
+        from: @files[:temp],
+        to: @files[:output],
+        browsers: [
+          'Chrome >= 45',
+          'Firefox ESR',
+          'Edge >= 12',
+          'Explorer >= 10',
+          'iOS >= 9',
+          'Safari >= 9',
+          'Android >= 4.4',
+          'Opera >= 30'
+        ]
+      }).css
+    end
 
-    # Check if file was created
+    # Check if files were created
+    assert File.exist?(@files[:temp])
     assert File.exist?(@files[:output])
   end
 end

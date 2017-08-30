@@ -28,8 +28,8 @@
 
 // Row
 .row {
-	@include display-flex;
-	@include flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 	overflow: hidden;
 	margin-left: get-rems((map-get($grid, spacing) * -1));
 	margin-right: get-rems((map-get($grid, spacing) * -1));

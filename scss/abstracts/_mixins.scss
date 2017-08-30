@@ -14,20 +14,20 @@
 @mixin grid-columns($breakpoint, $columns: map-get($grid, columns)) {
 	// Width
 	.col-#{$breakpoint} {
-		@include flex-basis(0);
-		@include flex-grow(1);
+		flex-basis: 0;
+		flex-grow: 1;
 		max-width: 100%;
 	}
 
 	.col-#{$breakpoint}-auto {
-		@include flex(0 0 auto);
+		flex: 0 0 auto;
 		width: auto;
 		max-width: none;
 	}
 
 	@for $column from 1 through $columns {
 		.col-#{$breakpoint}-#{$column} {
-			@include flex(0 0 percentage($column / $columns));
+			flex: 0 0 percentage($column / $columns);
 			max-width: percentage($column / $columns);
 		}
 	}
@@ -41,21 +41,37 @@
 	// Order
 	@for $column from 1 through map-get($grid, columns) {
 		.order-#{$breakpoint}-#{$column} {
-			@include flex-order($column);
+			order: $column;
 		}
 	}
 
 	// Vertical alignment
 	@each $key in (top, middle, bottom) {
 		.#{$key}-#{$breakpoint} {
-			@include flex-align($key);
+			@if ($key == top) {
+				align-items: flex-start;
+			} @else if ($key == middle) {
+				align-items: center;
+			} @else if ($key == bottom) {
+				align-items: flex-end;
+			}
 		}
 	}
 
 	// Horizontal alignment
 	@each $key, $value in (start, center, end, around, between) {
 		.#{$key}-#{$breakpoint} {
-			@include flex-align($key);
+			@if ($key == start) {
+				justify-content: flex-start;
+			} @else if ($key == center) {
+				justify-content: center;
+			} @else if ($key == end) {
+				justify-content: flex-end;
+			} @else if ($key == around) {
+				justify-content: space-around;
+			} @else if ($key == between) {
+				justify-content: space-between;
+			}
 		}
 	}
 
@@ -68,81 +84,5 @@
 				margin-left: auto; // Reset
 			}
 		}
-	}
-}
-
-/// Cross-browser support for flex value
-/// for the display property
-@mixin display-flex {
-	display: -ms-flexbox;
-	display: flex;
-}
-
-/// Cross-browser support for the flex property
-/// @param list $value	List of values
-@mixin flex($list) {
-	-ms-flex: $list;
-	flex: $list;
-}
-
-/// Cross-browser support for the flex-wrap property
-/// @param string $value	Wrap style
-@mixin flex-wrap($style) {
-	-ms-flex-wrap: $style;
-	flex-wrap: $style;
-}
-
-/// Cross-browser support for the flex-basis property
-/// @param number $number	Length
-@mixin flex-basis($number) {
-	-ms-flex-preferred-size: $number;
-	flex-basis: $number;
-}
-
-/// Cross-browser support for the flex-grow property
-/// @param number $number	Length
-@mixin flex-grow($number) {
-	-ms-flex-positive: $number;
-	flex-grow: $number;
-}
-
-/// Cross-browser support for the flex order property
-/// @param number $order	Order within the container
-@mixin flex-order($order) {
-	-ms-flex-order: $order;
-	order: $order;
-}
-
-/// Cross browser support for flex alignments
-/// @param string $position	Position name
-@mixin flex-align($position) {
-	// Vertical
-	@if ($position == top) {
-		-ms-flex-align: start;
-		align-items: flex-start;
-	} @else if ($position == middle) {
-		-ms-flex-align: center;
-		align-items: center;
-	} @else if ($position == bottom) {
-		-ms-flex-align: flex-end;
-		align-items: end;
-	}
-
-	// Horizontal
-	@if ($position == start) {
-		-ms-flex-pack: start;
-		justify-content: flex-start;
-	} @else if ($position == center) {
-		-ms-flex-pack: center;
-		justify-content: center;
-	} @else if ($position == end) {
-		-ms-flex-pack: end;
-		justify-content: flex-end;
-	} @else if ($position == around) {
-		-ms-flex-pack: distribute;
-		justify-content: space-around;
-	} @else if ($position == between) {
-		-ms-flex-pack: justify;
-		justify-content: space-between;
 	}
 }
