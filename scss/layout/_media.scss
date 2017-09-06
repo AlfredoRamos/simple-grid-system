@@ -1,19 +1,29 @@
 // Responsive embeds
 .media {
-	height: 0;
-	overflow: hidden;
+	width: 100%;
+	display: block;
 	position: relative;
-	padding-top: get-rems(25px);
+	padding: 0;
+	overflow: hidden;
+
+	&::before {
+		display: block;
+		content: "";
+	}
 
 	// 16:9 aspect ratio
 	&,
 	&-16-9 {
-		padding-bottom: percentage(9/16);
+		&::before {
+			padding-top: percentage(9/16);
+		}
 	}
 
 	// 4:3 aspect ratio
 	&-4-3 {
-		padding-bottom: percentage(3/4);
+		&::before {
+			padding-top: percentage(3/4);
+		}
 	}
 
 	%media-item {
