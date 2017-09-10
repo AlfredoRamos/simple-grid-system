@@ -10,19 +10,17 @@
 }
 
 .container {
+	@each $key, $value in $grid-breakpoints {
+		@include responsive(min-width, $value) {
+			@if map-has-key($container-max-widths, $key) {
+				max-width: get-rems(map-get($container-max-widths, $key));
+			}
+		}
+	}
+
 	&,
 	&-fluid {
 		@extend %container;
-	}
-
-	& {
-		@each $key, $value in $grid-breakpoints {
-			@include responsive(min-width, $value) {
-				@if map-has-key($container-max-widths, $key) {
-					max-width: get-rems(map-get($container-max-widths, $key));
-				}
-			}
-		}
 	}
 }
 
@@ -31,8 +29,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	overflow: hidden;
-	margin-left: get-rems((map-get($grid, spacing) * -1));
-	margin-right: get-rems((map-get($grid, spacing) * -1));
+	margin-left: get-rems(map-get($grid, spacing) * -1);
+	margin-right: get-rems(map-get($grid, spacing) * -1);
 }
 
 // Columns
