@@ -33,6 +33,7 @@ namespace :build do
 
       f.puts AutoprefixerRails.process(css, {
         map: false,
+        cascade: false,
         from: files[:input],
         to: files[:output].first,
         browsers: [
@@ -63,6 +64,7 @@ namespace :build do
 
       f.puts AutoprefixerRails.process(css, {
         map: false,
+        cascade: false,
         from: files[:input],
         to: files[:output].last,
         browsers: [
