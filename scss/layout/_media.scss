@@ -11,6 +11,13 @@
 		content: "";
 	}
 
+	// 21:9 aspect ratio
+	&-21-9 {
+		&::before {
+			padding-top: percentage(9/21);
+		}
+	}
+
 	// 16:9 aspect ratio
 	&,
 	&-16-9 {
@@ -23,6 +30,13 @@
 	&-4-3 {
 		&::before {
 			padding-top: percentage(3/4);
+		}
+	}
+
+	// 1:1 aspect ratio
+	&-1-1 {
+		&::before {
+			padding-top: percentage(1/1);
 		}
 	}
 
