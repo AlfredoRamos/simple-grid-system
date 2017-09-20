@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 ruby RUBY_VERSION
 
-# SASS
-gem 'sass', '~>3.5.0'
-gem 'autoprefixer-rails'
-
-# Unit testing
-group :test do
+group :development do
+  gem 'sass', '~>3.5.0'
+  gem 'autoprefixer-rails'
   gem 'rake'
+end
+
+group :test do
   gem 'minitest'
 end
