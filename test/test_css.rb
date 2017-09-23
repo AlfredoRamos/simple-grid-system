@@ -10,15 +10,32 @@ class TestCss < Minitest::Test
     # Load tasks
     load('Rakefile', true)
 
+    # Build path
+    @path = 'build'
+
+    # Output filenames
+    @files = ['grids.css', 'grids.min.css']
+    @files.map! { |file| File.join(@path, file) }
+
+    # Minimum file size (15 KiB)
+    @size = (15 * 1000)
+
     # Clean build
-    FileUtils.rm_r('build', force: true, secure: true) if Dir.exist?('build')
+    FileUtils.rm_r(@path, force: true, secure: true) if Dir.exist?(@path)
+    Dir.mkdir(@path) unless Dir.exist?(@path)
   end
 
   def test_css_file
-    # Create CSS file
     Rake::Task['build:css'].invoke
 
-    # Check if file exists
-    assert File.exist?('build/grids.css')
+    assert File.exist?(@files.first)
+    assert_operator File.size(@files.first), :>=, @size
+  end
+
+  def test_minified_css_file
+    Rake::Task['build:minified'].invoke
+
+    assert File.exist?(@files.last)
+    assert_operator File.size(@files.last), :>=, @size
   end
 end
