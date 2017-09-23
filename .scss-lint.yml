@@ -16,7 +16,7 @@ linters:
 
   BorderZero:
     enabled: true
-    convention: zero # or `none`
+    convention: none # or `zero`
 
   ChainedClasses:
     enabled: false
