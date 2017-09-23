@@ -1,12 +1,12 @@
 // Container
 %container {
-	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: get-rems(map-get($grid, spacing));
+	margin-left: auto;
+	padding-right: get-rems(map-get($grid, spacing));
+	padding-left: get-rems(map-get($grid, spacing));
 	overflow: hidden;
 	word-wrap: break-word;
-	margin-bottom: get-rems(map-get($grid, spacing));
-	padding-left: get-rems(map-get($grid, spacing));
-	padding-right: get-rems(map-get($grid, spacing));
 }
 
 .container {
@@ -28,19 +28,19 @@
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	overflow: hidden;
-	margin-left: get-rems(map-get($grid, spacing) * -1);
 	margin-right: get-rems(map-get($grid, spacing) * -1);
+	margin-left: get-rems(map-get($grid, spacing) * -1);
+	overflow: hidden;
 }
 
 // Columns
 %grid-column {
 	position: relative;
+	padding-right: get-rems(map-get($grid, spacing));
+	padding-left: get-rems(map-get($grid, spacing));
 	width: 100%;
 	min-height: get-rems(1px);
 	overflow: hidden;
-	padding-left: get-rems(map-get($grid, spacing));
-	padding-right: get-rems(map-get($grid, spacing));
 }
 
 @each $key, $value in $grid-breakpoints {
