@@ -26,6 +26,8 @@ class TestCss < Minitest::Test
   end
 
   def test_css_file
+    assert !File.exist?(@files.first)
+
     Rake::Task['build:css'].invoke
 
     assert File.exist?(@files.first)
@@ -33,6 +35,8 @@ class TestCss < Minitest::Test
   end
 
   def test_minified_css_file
+    assert !File.exist?(@files.last)
+
     Rake::Task['build:minified'].invoke
 
     assert File.exist?(@files.last)
