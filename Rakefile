@@ -26,7 +26,7 @@ namespace :build do
   end
 
   desc 'Base build'
-  task :base, [:opts] => [:setup] do |t, args|
+  task :base, [:opts] => [:setup] do |_t, args|
     File.open(args[:opts][:output], 'w') do |f|
       css = Sass::Engine.new(File.read(args[:opts][:input]), {
         style: args[:opts][:style],
