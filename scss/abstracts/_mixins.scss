@@ -33,11 +33,18 @@
 	}
 }
 
-/// Generate CSS classes for flex ordering,
-/// alignments and offsets
+/// Generate CSS classes for flex direction,
+/// order, alignment and offset
 /// @param string	$breakpoint	Breakpoint name
 /// @param number	$columns	Total number of columns
 @mixin flex-helpers($breakpoint, $columns: map-get($grid, columns)) {
+	// Direction
+	@each $key in (row, row-reverse, column, column-reverse) {
+		.direction-#{$breakpoint}-#{$key} {
+			flex-direction: $key;
+		}
+	}
+
 	// Order
 	@for $column from 1 through map-get($grid, columns) {
 		.order-#{$breakpoint}-#{$column} {
@@ -77,11 +84,13 @@
 
 	// Offset
 	@for $column from 0 through $columns {
-		.offset-#{$breakpoint}-#{$column} {
-			@if ($column > 0) {
+		@if ($column > 0) {
+			.offset-#{$breakpoint}-#{$column} {
 				margin-left: percentage($column / $columns);
-			} @else {
-				margin-left: auto; // Reset
+			}
+		} @else {
+			.offset-#{$breakpoint}-auto {
+				margin-left: auto;
 			}
 		}
 	}
