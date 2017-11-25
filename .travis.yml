@@ -9,7 +9,6 @@ matrix:
 branches:
   only:
     - master
-    - float-layout
 
 cache:
   bundler: true
