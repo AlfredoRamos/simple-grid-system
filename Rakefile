@@ -3,6 +3,7 @@
 require 'rake/testtask'
 require 'sass'
 require 'autoprefixer-rails'
+require 'scss_lint/rake_task'
 
 $stdout.sync = $stderr.sync = true
 
@@ -11,6 +12,9 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/test_*.rb']
   t.verbose = true
 end
+
+# SCSS Lint
+SCSSLint::RakeTask.new
 
 task :default => :test
 
