@@ -8,8 +8,8 @@ Precompiled CSS files (`grids.css` and `grids.min.css`) can be found in [this gi
 
 ### Dependencies
 
-- `ruby` >= 2.2.0
-- `bundler` [[info](https://bundler.io/)]
+- Ruby >= 2.2.0
+- Bundler [[info](https://bundler.io/)]
 
 For a list of gem dependencies, see the [Gemfile](https://github.com/AlfredoRamos/simple-grid-system/blob/master/Gemfile).
 
