@@ -15,6 +15,13 @@ linters:
     enabled: true
     character: tab
     width: 1
+  PlaceholderInExtend:
+    enabled: true
   PropertySortOrder:
     enabled: true
     order: concentric
+  PropertyUnits:
+    enabled: true
+    global: ['rem', '%']
+  TrailingZero:
+    enabled: true
