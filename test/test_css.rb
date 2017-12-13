@@ -18,11 +18,12 @@ class TestCss < Minitest::Test
     @files.map! { |file| File.join(@path, file) }
 
     # Minimum file size (15 KiB)
-    @size = (15 * 1000)
+    @size = (15 * 1024)
+  end
 
+  def teardown
     # Clean build
-    FileUtils.rm_r(@path, force: true, secure: true) if Dir.exist?(@path)
-    Dir.mkdir(@path) unless Dir.exist?(@path)
+    FileUtils.rm(@files, force: true)
   end
 
   def test_css_file
