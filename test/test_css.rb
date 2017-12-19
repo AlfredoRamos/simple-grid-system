@@ -1,11 +1,8 @@
-# encoding: UTF-8
-
 require 'minitest/autorun'
 require 'rake'
 require 'fileutils'
 
 class TestCss < Minitest::Test
-
   def setup
     # Load tasks
     load('Rakefile', true)

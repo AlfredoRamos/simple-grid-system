@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'rake/testtask'
 require 'sass'
 require 'autoprefixer-rails'
@@ -30,15 +28,17 @@ namespace :build do
   desc 'Base build'
   task :base, [:opts] => [:setup] do |_t, args|
     File.open(args[:opts][:output], 'w') do |f|
-      css = Sass::Engine.new(File.read(args[:opts][:input]), {
+      css = Sass::Engine.new(
+        File.read(args[:opts][:input]),
         style: args[:opts][:style],
         cache: false,
         syntax: :scss,
         filename: args[:opts][:input],
         sourcemap: :none
-      }).render
+      ).render
 
-      f.puts AutoprefixerRails.process(css, {
+      f.puts AutoprefixerRails.process(
+        css,
         map: false,
         cascade: false,
         from: args[:opts][:input],
@@ -53,7 +53,7 @@ namespace :build do
           'Android >= 4.4',
           'Opera >= 30'
         ]
-      }).css
+      ).css
     end
   end
 
