@@ -19,9 +19,7 @@ class TestCss < Minitest::Test
 
     # Minimum file size (15 KiB)
     @size = (15 * 1024)
-  end
 
-  def teardown
     # Clean build
     FileUtils.rm(@files, force: true)
   end
