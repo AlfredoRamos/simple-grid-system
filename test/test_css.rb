@@ -14,8 +14,8 @@ class TestCss < Minitest::Test
     @files = ['grids.css', 'grids.min.css']
     @files.map! { |file| File.join(@path, file) }
 
-    # Minimum file size (15 KiB)
-    @size = (15 * 1024)
+    # Minimum file size (14.7 KiB)
+    @size = (14.7 * 1024)
 
     # Clean build
     FileUtils.rm(@files, force: true)
