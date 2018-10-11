@@ -25,3 +25,6 @@ before_install:
 script:
   - bundle exec rake test
   - bundle exec rake scss_lint
+
+after_script:
+  - bundle exec rake rubocop
