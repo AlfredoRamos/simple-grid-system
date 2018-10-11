@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'rake/testtask'
 require 'sassc'
 require 'autoprefixer-rails'
 require 'scss_lint/rake_task'
+require 'rubocop/rake_task'
 
 $stdout.sync = $stderr.sync = true
 
@@ -13,6 +16,9 @@ end
 
 # SCSS Lint
 SCSSLint::RakeTask.new
+
+# RuboCop
+RuboCop::RakeTask.new
 
 namespace :build do
   files = {
